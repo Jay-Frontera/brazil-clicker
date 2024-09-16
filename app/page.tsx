@@ -8,7 +8,7 @@ import { millify } from 'millify'
 import { IoIosWater } from "react-icons/io";
 import { GiHammerSickle } from "react-icons/gi";
 import { GiMeal } from "react-icons/gi";
-import StatusCard from "./components/status";
+import StatusCard, { Status } from "./components/status";
 import ClickAbleCard from "./components/card";
 import { BsFillBackpack3Fill } from "react-icons/bs";
 import { MdWork } from "react-icons/md";
@@ -47,7 +47,7 @@ export default function Home() {
 
       toast.success('You just got a lucky recharge')
     }
-    
+
     if (paymentSeconds <= 0) {
       setCount(0)
       setMoney(prevPoints => prevPoints + count)
@@ -72,7 +72,7 @@ export default function Home() {
           return;
         }
 
-        if (ExecutedItem.item.isConsumable === false) {
+        if (!ExecutedItem?.item.isConsumable) {
           toast.error('This item is not consumable');
           return;
         }
@@ -153,23 +153,14 @@ export default function Home() {
             </div>
             <div className="border w-full border-orange-300 rounded-md" />
             <div className="w-full h-max flex gap-2 justify-center">
-              <StatusCard>
-                <IoIosWater
-                  className="text-2xl text-blue-700"
-                />
-
-                <h1 className="text-2xl font-bold text-center text-brown-500">
-                  {millify(water, { precision: 2 })}
-                </h1>
-              </StatusCard>
-              <StatusCard>
-                <GiMeal
-                  className="text-2xl text-orange-500"
-                />
-                <h1 className="text-2xl font-bold text-center text-brown-500">
-                  {millify(food, { precision: 2 })}
-                </h1>
-              </StatusCard>
+              <Status 
+                value={water}
+                statusType="thirst"
+              />
+              <Status
+                value={food}
+                statusType="hunger"
+              />
             </div>
             <div className="grid grid-cols-2 h-max w-fit gap-5">
               <ClickAbleCard
