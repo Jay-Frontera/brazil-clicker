@@ -16,7 +16,11 @@ export interface ConsumableItem extends baseItem {
     }
 }
 
-export type Item = ConsumableItem
+export interface NonConsumableItem extends baseItem {
+    isConsumable: false
+}
+
+export type Item = ConsumableItem | NonConsumableItem
 
 export type Inventory = {
     item: Item,

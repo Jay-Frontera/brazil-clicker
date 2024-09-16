@@ -38,7 +38,9 @@ export default function Inventory({
                                 key={v.item.id}
                                 className='flex justify-between items-center border flex-col border-orange-300 bg-orange-100 rounded-lg'
                                 onClick={() => {
-                                    handleAction(ActionType.CONSUME, v.item)
+                                    if (v.item.isConsumable) {
+                                        handleAction(ActionType.CONSUME, v.item)
+                                    }
                                 }}
                             >
                                 <h1 className="text-base text-center justify-center items-center flex p-2 h-1/3 border-b border-orange-300 w-full bg-blue-100 rounded-r-lg">
@@ -49,24 +51,28 @@ export default function Inventory({
                                         src={v.item.icon} alt={v.item.name}
                                         className="w-20 h-20"
                                     />
-                                    <div className="flex gap-2">
-                                        {
-                                            v.item.effects.hunger && (
-                                                <Status
-                                                    statusType="hunger"
-                                                    value={v.item.effects.hunger}
-                                                />
-                                            )
-                                        }
-                                        {
-                                            v.item.effects.thirst && (
-                                                <Status
-                                                    statusType="thirst"
-                                                    value={v.item.effects.thirst}
-                                                />
-                                            )
-                                        }
-                                    </div>
+                                    {
+                                        v.item.isConsumable && (
+                                            <div className="flex gap-2">
+                                                {
+                                                    v.item.effects.hunger && (
+                                                        <Status
+                                                            statusType="hunger"
+                                                            value={v.item.effects.hunger}
+                                                        />
+                                                    )
+                                                }
+                                                {
+                                                    v.item.effects.thirst && (
+                                                        <Status
+                                                            statusType="thirst"
+                                                            value={v.item.effects.thirst}
+                                                        />
+                                                    )
+                                                }
+                                            </div>
+                                        )
+                                    }
                                 </div>
                                 <div className="border-t border-orange-400 w-full justify-center items-center flex bg-orange-300 p-1">
                                     <p>

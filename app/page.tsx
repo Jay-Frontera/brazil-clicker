@@ -72,7 +72,7 @@ export default function Home() {
           return;
         }
 
-        if (!ExecutedItem?.item.isConsumable) {
+        if (ExecutedItem?.item.isConsumable == false) {
           toast.error('This item is not consumable');
           return;
         }
