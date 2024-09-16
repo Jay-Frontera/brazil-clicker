@@ -31,5 +31,3 @@ export const basePlayerMock: {
         }
     ]
 }
-
-console.log(basePlayerMock)

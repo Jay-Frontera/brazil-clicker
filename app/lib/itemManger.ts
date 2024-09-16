@@ -12,8 +12,6 @@ export class ItemLoader {
     }
 
     public getItem(id: number): Item {
-        console.log(this.items)
-        console.log(this.items.get(id))
         return this.items.get(id)
     }
 
