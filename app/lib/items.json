@@ -3,6 +3,7 @@
         "id": 1,
         "name": "Water",
         "price": 2.5,
+        "isConsumable": true,
         "icon": "https://media.discordapp.net/attachments/1005729932732809217/1285060262789124127/water_bottle.png?ex=66e8e521&is=66e793a1&hm=5095a0a031a8eeeff2c9c0d699a9e559acd2e5c967e268dab4792b49089edb3c&=&format=webp&quality=lossless&width=904&height=904",
         "description": "A bottle of water to keep you hydrated.",
         "effects": {
@@ -13,6 +14,7 @@
         "id": 2,
         "name": "Coxinha",
         "price": 5,
+        "isConsumable": true,
         "icon": "https://media.discordapp.net/attachments/1005729932732809217/1285063421141844039/uMz82CMRnjhQbBAEQAAEQAAEQAAEQAAEQAIHVJACBuJrnDasGARAAARAAARAAARAAARAAgWdOAALxmSPFBkHgFBNAicopPrk4NBAAARAAARAAARBADyKuARAAARAAARAAARAAARAAARAAASUABxGXAgiAAAiAAAiAAAiAAAiAAAiAABOAQMSFAAIgAAIgAAIgAAIgAAIgAAIgAIGIawAEQOAMEkAf5Rk86ThkEAABEAABEACBX5XAfwepLMorITkt8AAAAABJRU5ErkJggg.png?ex=66e8e812&is=66e79692&hm=49b6697fc4229a569853205e0714308428d45c580f4ca0903b2d42e8821391f5&=&format=webp&quality=lossless&width=385&height=385",
         "description": "Hmmmm que delisia.",
         "effects": {
@@ -24,6 +26,7 @@
         "id": 3,
         "name": "Bread",
         "price": 1,
+        "isConsumable": true,
         "icon": "https://media.discordapp.net/attachments/1005729932732809217/1285063144712175729/gp6u34AAAAASUVORK5CYII.png?ex=66e8e7d1&is=66e79651&hm=0939f4079980124c3e2dace927f69635bb86c0891563e8e25d1f6f89499c27fd&=&format=webp&quality=lossless&width=904&height=904",
         "description": "A bigger bottle of water to keep you hydrated.",
         "effects": {
