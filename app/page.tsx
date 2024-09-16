@@ -8,13 +8,14 @@ import { millify } from 'millify'
 import { IoIosWater } from "react-icons/io";
 import { GiHammerSickle } from "react-icons/gi";
 import { GiMeal } from "react-icons/gi";
-import StatusCard from "./components/status";
+import StatusCard, { Status } from "./components/status";
 import ClickAbleCard from "./components/card";
 import { BsFillBackpack3Fill } from "react-icons/bs";
 import { MdWork } from "react-icons/md";
-import { Toaster } from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast'
 import { basePlayerMock } from "./mock/player";
 import Inventory from "./components/inventory";
+import { ActionType, ConsumableItem, Item } from "./types";
 
 export default function Home() {
   const [money, setMoney] = useState(basePlayerMock.money)
@@ -36,6 +37,17 @@ export default function Home() {
   }
 
   useEffect(() => {
+    const randomRechargeChance = Math.random() * 100
+
+    if (randomRechargeChance <= 2
+
+    ) {
+      setFood(prevFood => prevFood + 10)
+      setWater(prevWater => prevWater + 10)
+
+      toast.success('You just got a lucky recharge')
+    }
+
     if (paymentSeconds <= 0) {
       setCount(0)
       setMoney(prevPoints => prevPoints + count)
@@ -44,6 +56,47 @@ export default function Home() {
     }
 
   }, [paymentSeconds])
+
+  function handleAction(actionType: ActionType, item: Item) {
+    switch (actionType) {
+      case ActionType.CONSUME:
+        const consumable = item as ConsumableItem
+
+        const index = inventory.findIndex(v => v.item.id === consumable.id)
+
+        const ExecutedItem = inventory.find(v => v.item.id === consumable.id)
+
+        if (ExecutedItem?.amount <= 0) {
+          toast.error('You dont have this item in your inventory');
+          inventory.splice(index, 1)
+          return;
+        }
+
+        if (!ExecutedItem?.item.isConsumable) {
+          toast.error('This item is not consumable');
+          return;
+        }
+
+        console.log(item)
+
+        setWater(prevWater => prevWater + (consumable.effects?.thirst || 0))
+        setFood(prevFood => prevFood + (consumable.effects?.hunger || 0))
+
+        inventory[index].amount -= 1
+
+        if (inventory[index].amount <= 0) {
+          inventory.splice(index, 1)
+        }
+
+        toast.success(`You consumed 1x ${consumable.name}`)
+
+        setInventory([...inventory])
+
+        break;
+      default:
+        break;
+    }
+  }
 
   useEffect(() => {
     if (loaded) return;
@@ -70,6 +123,7 @@ export default function Home() {
         open={isInventoryOpen}
         handleClose={() => setInventoryOpen(false)}
         items={inventory}
+        handleAction={handleAction}
       />
       <div className="flex gap-2 justify-center items-center bg-orange-300">
         <div className="border-r border-black h-full" />
@@ -99,23 +153,14 @@ export default function Home() {
             </div>
             <div className="border w-full border-orange-300 rounded-md" />
             <div className="w-full h-max flex gap-2 justify-center">
-              <StatusCard>
-                <IoIosWater
-                  className="text-2xl text-blue-700"
-                />
-
-                <h1 className="text-2xl font-bold text-center text-brown-500">
-                  {millify(water, { precision: 2 })}
-                </h1>
-              </StatusCard>
-              <StatusCard>
-                <GiMeal
-                  className="text-2xl text-orange-500"
-                />
-                <h1 className="text-2xl font-bold text-center text-brown-500">
-                  {millify(food, { precision: 2 })}
-                </h1>
-              </StatusCard>
+              <Status 
+                value={water}
+                statusType="thirst"
+              />
+              <Status
+                value={food}
+                statusType="hunger"
+              />
             </div>
             <div className="grid grid-cols-2 h-max w-fit gap-5">
               <ClickAbleCard

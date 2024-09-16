@@ -1,14 +1,18 @@
-import type { Inventory, Item } from "../types";
+import { ActionType, Item } from "../types";
+import type { Inventory } from "../types";
 import BaseModal from "./modal";
+import { Status } from "./status";
 
 export default function Inventory({
     items,
     open,
-    handleClose
+    handleClose,
+    handleAction
 }: {
     items: Inventory,
     open: boolean,
-    handleClose: () => void
+    handleClose: () => void,
+    handleAction: (action: ActionType, item: Item) => void
 }) {
     return (
         <BaseModal
@@ -30,22 +34,46 @@ export default function Inventory({
                         }
                     ) => {
                         return (
-                            <div key={v.item.id} className='flex justify-between items-center border flex-col border-orange-300 bg-orange-100 rounded-lg'>
+                            <button
+                                key={v.item.id}
+                                className='flex justify-between items-center border flex-col border-orange-300 bg-orange-100 rounded-lg'
+                                onClick={() => {
+                                    handleAction(ActionType.CONSUME, v.item)
+                                }}
+                            >
                                 <h1 className="text-base text-center justify-center items-center flex p-2 h-1/3 border-b border-orange-300 w-full bg-blue-100 rounded-r-lg">
                                     {v.item.name}
                                 </h1>
-                                <div className="py-3">
+                                <div className="py-3 flex flex-col justify-center w-full items-center">
                                     <img
                                         src={v.item.icon} alt={v.item.name}
                                         className="w-20 h-20"
                                     />
+                                    <div className="flex gap-2">
+                                        {
+                                            v.item.effects.hunger && (
+                                                <Status
+                                                    statusType="hunger"
+                                                    value={v.item.effects.hunger}
+                                                />
+                                            )
+                                        }
+                                        {
+                                            v.item.effects.thirst && (
+                                                <Status
+                                                    statusType="thirst"
+                                                    value={v.item.effects.thirst}
+                                                />
+                                            )
+                                        }
+                                    </div>
                                 </div>
                                 <div className="border-t border-orange-400 w-full justify-center items-center flex bg-orange-300 p-1">
                                     <p>
                                         {v.amount}x
                                     </p>
                                 </div>
-                            </div>
+                            </button>
                         )
                     })
                 }
