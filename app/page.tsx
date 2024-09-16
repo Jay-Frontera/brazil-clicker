@@ -37,6 +37,17 @@ export default function Home() {
   }
 
   useEffect(() => {
+    const randomRechargeChance = Math.random() * 100
+
+    if (randomRechargeChance <= 2
+
+    ) {
+      setFood(prevFood => prevFood + 10)
+      setWater(prevWater => prevWater + 10)
+
+      toast.success('You just got a lucky recharge')
+    }
+    
     if (paymentSeconds <= 0) {
       setCount(0)
       setMoney(prevPoints => prevPoints + count)
