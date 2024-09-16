@@ -16,9 +16,9 @@ export default function BaseModal({
         <Modal
             open={open}
             onClose={handleClose}
-            className='border border-red-600 justify-center items-center flex'
+            className='justify-center items-center flex'
         >
-            <div className={`border-black md:w-2/3 md:h-2/3 rounded-md p-5 bg-orange-200 ${className}`}>
+            <div className={`border-orange-300 border md:w-2/3 md:h-2/3 rounded-md p-5 bg-orange-200 ${className}`}>
                 {children}
             </div>
         </Modal>
