@@ -4,18 +4,26 @@ export interface baseItem {
     price: number
     description: string
     icon: string
+    isConsumable: boolean
 }
 
 export interface ConsumableItem extends baseItem {
-    effect: {
+    isConsumable: true
+    effects: {
         thirst?: number,
         hunger?: number
+        eatlimit?: number
     }
 }
 
-export type Item = baseItem | ConsumableItem
+export type Item = ConsumableItem
 
 export type Inventory = {
     item: Item,
     amount: number
 }[]
+
+
+export enum ActionType {
+    CONSUME
+}
