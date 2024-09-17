@@ -153,7 +153,7 @@ export default function Home() {
             </div>
             <div className="border w-full border-orange-300 rounded-md" />
             <div className="w-full h-max flex gap-2 justify-center">
-              <Status 
+              <Status
                 value={water}
                 statusType="thirst"
               />
@@ -194,13 +194,17 @@ export default function Home() {
           <div className="flex flex-col items-center gap-5 w-full h-full p-5 justify-center">
             <button
               onClick={handleClick}
-              className="w-1/2 h-1/3 rounded-full bg-gradient-to-br from-orange-400 to-brown-500 shadow-lg transform transition-transform active:scale-95 focus:outline-none"
+              className="w-full rounded-full transform transition-transform active:scale-95 focus:outline-none flex justify-center items-center"
               aria-label="Increment counter"
             >
-              <h1 className="font-bold text-6xl text-red-700 flex gap-2 justify-center items-center">
-                <GiHammerSickle />
-                Work
-              </h1>
+              <Image
+                src={'/logo_stalin.png'}
+                width={200}
+                height={200}
+                alt="Logo"
+                className="rounded-full w-3/4 md:w-1/2 drop-shadow-lg"
+              >
+              </Image>
             </button>
 
           </div>
